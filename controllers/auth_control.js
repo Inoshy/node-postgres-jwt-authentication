@@ -91,5 +91,5 @@ module.exports.post_login = async (req, res) => {
 }
 
 module.exports.get_user_control = async (req, res) => {
-  res.render('user_control.html')
+  res.render('control.html')
 }
