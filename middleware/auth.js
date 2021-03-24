@@ -6,9 +6,7 @@ module.exports.is_auth = (req, res, next) => {
     jwt.verify(token, 'inodeska', (err, decoded_token) => {
       if (err) {
         console.log(err)
-        res.cookie('jwt', '', {
-          maxAge: 0
-        })
+        res.clearCookie('jwt')
         res.redirect('/user/login')
       } else {
         res.redirect('/')
@@ -26,9 +24,7 @@ module.exports.require_control = (req, res, next) => {
     jwt.verify(token, 'inodeska', (err, decoded_token) => {
       if (err) {
         console.log(err)
-        res.cookie('jwt', '', {
-          maxAge: 0
-        })
+        res.clearCookie('jwt')
         res.redirect('/user/login')
       } else {
         next()
@@ -38,4 +34,3 @@ module.exports.require_control = (req, res, next) => {
     res.redirect('/user/login')
   }
 }
-
