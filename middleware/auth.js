@@ -6,6 +6,9 @@ const is_auth = (req, res, next) => {
     jwt.verify(token, 'inodeska', (err, decoded_token) => {
       if (err) {
         console.log(err)
+        res.cookie('jwt', '', {
+          maxAge: 0
+        })
         res.redirect('/user/login')
       } else {
         res.redirect('/')
@@ -23,6 +26,9 @@ const require_control = (req, res, next) => {
     jwt.verify(token, 'inodeska', (err, decoded_token) => {
       if (err) {
         console.log(err)
+        res.cookie('jwt', '', {
+          maxAge: 0
+        })
         res.redirect('/user/login')
       } else {
         next()

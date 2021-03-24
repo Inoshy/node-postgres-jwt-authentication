@@ -8,6 +8,10 @@ const create_token = id => {
   })
 }
 
+const decode_token = token => {
+  return jwt.verify(token, 'inodeska').id
+}
+
 const create_cookie = (res, token) => {
   return res.cookie('jwt', token, {
     httpOnly: true,
@@ -91,5 +95,20 @@ module.exports.post_login = async (req, res) => {
 }
 
 module.exports.get_user_control = async (req, res) => {
-  res.render('control.html')
+  const token = req.cookies.jwt
+  const user_id = decode_token(token)
+  try {
+    retrieve_user = await db.query(
+      'SELECT name, email FROM users WHERE id = $1',
+      [user_id]
+    )
+    if (retrieve_user.rowCount > 0) {
+      username = retrieve_user.rows[0].name
+      usermail = retrieve_user.rows[0].email
+      res.render('control.html', { username, usermail })
+    }
+  } catch (err) {
+    console.log(err)
+    res.send('Error Retrieving Data!')
+  }
 }

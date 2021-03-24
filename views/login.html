@@ -27,7 +27,9 @@
         <button type="submit">Submit</button>
       </div>
       <footer>
+        {% if login_err %}
         {{ login_err }}
+        {% endif %}
       </footer>
     </form>
 
