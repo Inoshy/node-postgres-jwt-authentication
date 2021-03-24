@@ -26,4 +26,6 @@ router.use('/user/control', (req, res, next) => {
 
 router.get('/user/control', controller.panel.get)
 
+router.get('/user/logout', controller.logout.get)
+
 module.exports = router
