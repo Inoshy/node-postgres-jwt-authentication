@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt')
 const db = require('../../db/config')
-const cookies = require('./cookies')
-const jwt = require('./token')
+const jwt = require('jsonwebtoken')
 
 module.exports.get = (req, res) => {
   res.render('login.html')
@@ -22,9 +21,22 @@ module.exports.post = async (req, res) => {
           existing_user.rows[0].password
         )
         if (hash_match) {
-          console.log('match successful')
-          const token = jwt.sign_token(existing_user.rows[0].id)
-          cookies.create_jwt(res, token)
+
+          // Get user id from databse
+          user_id = existing_user.rows[0].id
+
+          // Sign token with user id
+          const token = jwt.sign({ user_id }, 'inodeska', {
+            expiresIn: 3 * 24 * 60 * 60
+          })
+
+          // Set cookie 'jwt' with signed token
+          res.cookie('jwt', token, {
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60 * 24 * 3
+          })
+
+          // Redirect to homepage
           res.redirect('/')
         } else {
           login_err = 'Incorrect Password!'

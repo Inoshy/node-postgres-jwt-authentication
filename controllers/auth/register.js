@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt')
 const db = require('../../db/config')
-const jwt = require('./token')
-const cookies = require('./cookies')
+const jwt = require('jsonwebtoken')
 
 module.exports.get = (req, res) => {
   res.render('register.html')
@@ -26,8 +25,22 @@ module.exports.post = async (req, res) => {
           [name, email, hashed_password]
         )
         if (insert_user.rowCount > 0) {
-          const token = jwt.sign_token(insert_user.rows[0].id)
-          cookies.create_jwt(res, token)
+
+          // Get user id from database
+          user_id = insert_user.rows[0].id
+
+          // Sign token with user id
+          const token = jwt.sign({ user_id }, 'inodeska', {
+            expiresIn: 3 * 24 * 60 * 60
+          })
+
+          // Set cookie jwt with signed token
+          res.cookie('jwt', token, {
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60 * 24 * 3
+          })
+
+          // Redirect to homepage
           res.redirect('/')
         }
       } catch (err) {

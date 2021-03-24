@@ -10,17 +10,12 @@
 </head>
 
 <body>
-  {{ foo }}
-  {% if not_authenticated %}
-  {{ user }}
-  <form method="post">
-    <button>Logout</button>
-  </form>
+  
+  {% if username %}
+  <h1>{{ username }}</h1>
+  <a href="/user/logout">Logout</a>
   {% endif %}
 
-  {% for user in all_user %}
-    here {{ user.name }}
-  {% endfor %}
 </body>
 
 </html>
