@@ -10,7 +10,6 @@ module.exports.is_auth = (req, res, next) => {
         res.redirect('/user/login')
       } else {
         res.redirect('/')
-        console.log(decoded_token)
       }
     })
   } else {
