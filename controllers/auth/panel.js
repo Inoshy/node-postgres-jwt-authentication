@@ -5,7 +5,7 @@ module.exports.get = async (req, res) => {
   const token = req.cookies.jwt
   // Decode token verified by middleware
   // Get user id from decoded token
-  const user_id = jwt.decode(token).user_id
+  const user_id = jwt.decode(token).user_id 
   try {
     // Retrieve user data found from token
     retrieve_user = await db.query(
