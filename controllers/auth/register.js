@@ -18,7 +18,7 @@ module.exports.post = async (req, res) => {
     )
   } catch (err) {
     validation_err = 'Error occured on our end! Please try later!'
-    res.send('register.html', { validation_err })
+    res.render('register.html', { validation_err })
   }
 
   // If email is already registered, show error message
