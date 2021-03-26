@@ -1,11 +1,10 @@
 const db = require('../db/config')
-const jwt = require('jsonwebtoken')
 
 module.exports.get_home = async (req, res) => {
-  token = req.cookies.jwt
-  if (token) {
-    // Retrieve user id from decoded token
-    user_id = jwt.decode(token).user_id
+  if (req.decoded_token) {
+    // Retrieve user id via http
+    const user_id = req.decoded_token.user_id
+
     let retrieve_user
     let data_retrieve_error = ''
 
