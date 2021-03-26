@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const db = require('../../db/config')
 const jwt = require('jsonwebtoken')
+const validator = require('validator')
 
 module.exports.get = (req, res) => {
   res.render('register.html')
@@ -10,6 +11,9 @@ module.exports.post = async (req, res) => {
   const { name, email, password } = req.body
   let check_existing_email
   let validation_err = ''
+
+  console.log(name.replace(/\s/g, ""))
+
   try {
     // Check if email is already in database
     check_existing_email = await db.query(
