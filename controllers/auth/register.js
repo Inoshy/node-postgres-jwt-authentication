@@ -16,9 +16,42 @@ module.exports.post = async (req, res) => {
   name = name.replace(/\s/g, '')
   email = email.replace(/\s/g, '')
 
-  // Check if improper username or email
-  if (!validator.isAlpha(name) || !validator.isEmail(email)) {
-    validation_err = 'Improper Username or Email!'
+  // Check username length
+  if (name.length < 3 || name.length > 10) {
+    validation_err = 'Username too short!'
+
+    // Render register page with error message
+    res.render('register.html', { validation_err })
+
+    // Early exit from function
+    return
+  }
+
+  // Check email length
+  if (email.length < 10 || name.length > 80) {
+    validation_err = 'Username too short!'
+
+    // Render register page with error message
+    res.render('register.html', { validation_err })
+
+    // Early exit from function
+    return
+  }
+
+  // Check if improper username 
+  if (!validator.isAlpha(name)) {
+    validation_err = 'Improper Username!'
+
+    // Render register page with error message
+    res.render('register.html', { validation_err })
+
+    // Early exit from function
+    return
+  }
+
+  // Check if improper email
+  if (!validator.isEmail(email)) {
+    validation_err = 'Improper Email!'
 
     // Render register page with error message
     res.render('register.html', { validation_err })
