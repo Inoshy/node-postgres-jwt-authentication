@@ -11,12 +11,15 @@ body {
 .form-module {
   width: fit-content;
   margin: 0 auto;
+  padding: 1rem 0.5rem 1.25rem 0.5rem;
+  border-radius: 0.25rem;
 }
 
 .form-module header {
   text-align: center;
   font-size: 1.75rem;
   padding: 0.25rem 0.5rem;
+  color: #000000;
 }
 
 .form-module .form-body {
@@ -31,10 +34,9 @@ body {
 
 .form-module .form-body .fill-up input {
   width: 15rem;
-  margin: 0.5rem;
-  padding: 1rem;
-  border-color: #333;
-  border-width: 0.075rem;
+  margin: 0.375rem;
+  padding: 0.5rem;
+  border: 0.0125rem solid #000;
   border-radius: 0.25rem;
 }
 
@@ -44,7 +46,7 @@ body {
 
 .form-module .form-body .fill-up input::-webkit-input-placeholder {
   font-family: Quicksand, sans-serif;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 500;
 }
 
@@ -52,16 +54,20 @@ body {
   margin: 0 auto;
   display: block;
   width: 15rem;
-  padding: 0.75rem;
+  padding: 0.5rem;
   border: none;
-  border-radius: 0.125rem;
+  border-radius: 0.25rem;
   color: #fff;
-  background-color: #3b3b3b;
-  font-family: Quicksand, sans-serif;
-  font-size: 1.125rem;
+  background-color: #000000B3;
+  font-family: Quicksand;
   font-weight: 500;
+  font-size: 1.125rem;
   letter-spacing: 0.05rem;
   cursor: pointer;
+}
+
+.form-module .form-body button:focus {
+  outline: none;
 }
 
 .form-module footer {
